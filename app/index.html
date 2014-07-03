@@ -1,0 +1,114 @@
+<!doctype html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <title>Zucchini Timer</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        <link rel="shortcut icon" href="/favicon.ico">
+        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+        <!-- build:css styles/vendor.css -->
+        <!-- bower:css -->
+        <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.css">
+
+        <!-- endbower -->
+        <!-- endbuild -->
+        <!-- build:css(.tmp) styles/main.css -->
+        <link rel="stylesheet" href="styles/main.css">
+        <!-- endbuild -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
+
+    </head>
+    <body>
+        <div class="nav-overlay">
+            <div class="page page-account">
+                <div class="exit-page">
+                    <a href="#"><span class="fa fa-times"></span></a>
+                </div>
+                <div class="account-content">
+                        <h2>Account</h2>
+                </div>
+            </div>
+            <div class="page page-settings">
+                <div class="exit-page">
+                    <a href="#"><span class="fa fa-times"></span></a>
+                </div>
+                <div class="settings-content">
+                    <h2>Settings</h2>
+                </div>
+            </div>
+            <div class="page page-faq">
+                <div class="exit-page">
+                    <a href="#"><span class="fa fa-times"></span></a>
+                </div>
+                <div class="faq-content">
+                    <h2>FAQ</h2>
+                </div>
+            </div>
+        </div>
+        <div class="tracking-notes">
+            <div class="exit-page">
+                <a href="#"><span class="fa fa-times"></span></a>
+            </div>
+            <div class="notes">
+                <h2>Notes</h2>
+                    <form>
+                        <textarea type="text" name="notes" rows="8"></textarea>
+                    </form>
+                    <button>Save</button>
+            </div>  
+        </div>
+        <div class="container page_main">
+            <div class="navigation">
+                <ul>
+                    <li class="open-page" data-page="account"><a href="#"><span class="fa fa-user"></span></a></li>
+                    <li class="open-page" data-page="settings"><a href="#"><span class="fa fa-cog"></span></a></li>
+                    <li class="open-page" data-page="faq"><a href="#">?</a></li>
+                </ul>
+            </div>
+            <div class="timer-main">
+                <h1>Zucchini Timer</h1>
+                <p>Based on the <a href="http://en.wikipedia.org/wiki/Pomodoro_Technique" target="blank">Pomodoro technique</a>, this timer will boost your productivity by breaking down work into intervals separated by short breaks that improve mental agility.</p>
+                <div class="countdown">
+                    <p class="timer-inner"><span class="cta">Start Work Block</span><span class="clock">25:00</span></p>
+                </div>
+            </div>
+            <div class="hitstory">
+            </div>
+        </div>
+
+
+        <!-- build:js scripts/vendor.js -->
+        <!-- bower:js -->
+        <script src="../bower_components/jquery/dist/jquery.js"></script>
+        <script src="../bower_components/handlebars/handlebars.js"></script>
+        <!-- endbower -->
+        <!-- endbuild -->
+
+        <!-- build:js({app,.tmp}) scripts/main.js -->
+        <script src="scripts/main.js"></script>
+        <!-- endbuild -->
+
+
+        <script id="progress-template" type="text/x-handlebars-template">
+            <div class="progress-blocks">
+                {{#each blocks}}
+                    <div class="{{block_type}}-block">
+                        <div class="{{block_type}}-block-progress">
+                            &nbsp;
+                        </div>
+                        {{#if work}}
+                        <a class="work-block-edit" href="#"><span class="fa fa-pencil"></span></a>
+                        {{/if}}
+                    </div>
+                {{/each}}
+            </div>
+
+        </script>
+
+        <footer>
+            <img src="/images/DK-LOGO-xs.png">
+        </footer>
+
+</body>
+</html>
