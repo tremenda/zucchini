@@ -1,20 +1,16 @@
 var Zucchini = function () {
-  this.workTime   = 23;
+  this.workTime   = 25;
   this.shortBreak = 5;
   this.longBreak  = 15;
-  this.display = $(".timer-inner .clock");
+  this.display = $('.timer-inner .clock');
 
   this.timer = new Timer();
 
-  var prgoress_source = $("#progress-template").html();
+  var prgoress_source = $('#progress-template').html();
   this.progress_template = Handlebars.compile(prgoress_source);
 
-  this.progress_blocks = [];
+  this.restart();
 
-  var pb = new ProgressBlock();
-  pb.createTimeBlocks(this);
-
-  this.progress_blocks.push(pb);
   this.queueNextBlock();
 };
 
@@ -24,7 +20,7 @@ Zucchini.prototype.getProgressBlock = function () {
 
 Zucchini.prototype.queueNextBlock = function () {
   var block = this.getProgressBlock().getNextBlock();
-  $(".timer-inner .cta").html("Start " + _.str.titleize(_.str.humanize(block.block_type)));
+  $('.timer-inner .cta').html('Start ' + _.str.titleize(_.str.humanize(block.block_type)));
 
   this.timer.setTimer(this.getProgressBlock().getNextBlock());
   this.updateClock();
@@ -37,10 +33,22 @@ Zucchini.prototype.startNextBlock = function () {
 Zucchini.prototype.updateClock = function () {
   var minutes = Math.floor(this.timer.remaining / 60);
   var seconds = this.timer.remaining - minutes * 60;
-  minutes = ("0" + minutes).slice(-2);
-  seconds = ("0" + seconds).slice(-2);
-  this.timer.remainingStr = "" + minutes + ":" + seconds;
+  minutes = ('0' + minutes).slice(-2);
+  seconds = ('0' + seconds).slice(-2);
+  this.timer.remainingStr = '' + minutes + ':' + seconds;
   this.display.html(this.timer.remainingStr);
+};
+
+Zucchini.prototype.restart = function () {
+  if (this.timer.interval) {
+    this.timer.stopTimer();
+  }
+  this.progress_blocks = [];
+
+  var pb = new ProgressBlock();
+  pb.createTimeBlocks(this);
+
+  this.progress_blocks.push(pb);
 };
 
 var Timer = function () {
@@ -56,7 +64,7 @@ Timer.prototype.setTimer = function (block) {
 Timer.prototype.startTimer = function () {
   var self = this;
 
-  $(".timer-inner").addClass("active");
+  $('.timer-inner').addClass('active');
 
   self.updateTimer();
 
@@ -83,7 +91,7 @@ Timer.prototype.updateTimer = function() {
 Timer.prototype.stopTimer = function() {
   clearInterval(this.interval);
   this.interval = null;
-  $(".timer-inner").removeClass("active");
+  $('.timer-inner').removeClass('active');
   window.app.queueNextBlock();
 };
 
@@ -100,14 +108,14 @@ var ProgressBlock = function () {
 };
 
 ProgressBlock.prototype.createTimeBlocks = function (app) {
-  this.time_blocks.push(new TimeBlock("work", app.workTime, true));
-  this.time_blocks.push(new TimeBlock("short-break", app.shortBreak, false));
-  this.time_blocks.push(new TimeBlock("work", app.workTime, true));
-  this.time_blocks.push(new TimeBlock("short-break", app.shortBreak, false));
-  this.time_blocks.push(new TimeBlock("work", app.workTime, true));
-  this.time_blocks.push(new TimeBlock("short-break", app.shortBreak, false));
-  this.time_blocks.push(new TimeBlock("work", app.workTime, true));
-  this.time_blocks.push(new TimeBlock("long-break", app.longBreak, false));
+  this.time_blocks.push(new TimeBlock('work', app.workTime, true));
+  this.time_blocks.push(new TimeBlock('short-break', app.shortBreak, false));
+  this.time_blocks.push(new TimeBlock('work', app.workTime, true));
+  this.time_blocks.push(new TimeBlock('short-break', app.shortBreak, false));
+  this.time_blocks.push(new TimeBlock('work', app.workTime, true));
+  this.time_blocks.push(new TimeBlock('short-break', app.shortBreak, false));
+  this.time_blocks.push(new TimeBlock('work', app.workTime, true));
+  this.time_blocks.push(new TimeBlock('long-break', app.longBreak, false));
 };
 
 ProgressBlock.prototype.render = function () {
@@ -134,21 +142,21 @@ $().ready(function() {
 
   var gets = [];
   $.each(['history', 'settings', 'faq'], function(i, val) {
-    gets.push($.get(val + ".html", function (data) {
-      $(".pages").append(data);
+    gets.push($.get(val + '.html', function (data) {
+      $('.pages').append(data);
     }));
   });
 
   $.when.apply($, gets).done(function() {
-    $(".open-page").on('click', function(el) {
-      var page = $(this).attr("data-page");
-      $(".page-" + page).fadeIn();
+    $('.open-page').on('click', function(el) {
+      var page = $(this).attr('data-page');
+      $('.page-' + page).fadeIn();
     });
-    $(".exit-page").on('click', function() {
-        $(this).parents("div.page").fadeOut();
+    $('.exit-page').on('click', function() {
+        $(this).parents('div.page').fadeOut();
     });
-    $(".work-block-edit").on('click', function() {
-        $("div.tracking-notes").fadeIn();
+    $('.work-block-edit').on('click', function() {
+        $('div.tracking-notes').fadeIn();
     });
 
     $('#accordion .accordion-toggle').on('click', function(){
@@ -157,8 +165,34 @@ $().ready(function() {
       $(this).next().slideToggle('fast');
 
       //Hide the other panels
-      // $(".accordion-content").not($(this).next()).slideUp('fast');
+      // $('.accordion-content').not($(this).next()).slideUp('fast');
 
+    });
+
+    var vals = [window.app.workTime, window.app.shortBreak, window.app.longBreak];
+
+    $.each(['work-time', 'short-break', 'long-break'], function(i, val) {
+      $('.settings-content input[name=' + val + ']').on('change', function() {
+        $('.settings-content input[name=' + val +'-range]').val($(this).val());
+      });
+
+      $('.settings-content input[name=' + val + '-range]').on('change mousemove', function() {
+        $('.settings-content input[name=' + val +']').val($(this).val());
+      });
+
+      $('.settings-content input[name=' + val + '-range]').val(vals[i]);
+
+      $('.settings-content input[name=' + val + '-range]').trigger("change");
+    });
+
+    $('.settings-content form').on('submit', function(e) {
+      window.app.workTime = $(this).find('input[name=work-time]').val();
+      window.app.shortBreak = $(this).find('input[name=short-break]').val();
+      window.app.longBreak = $(this).find('input[name=long-break]').val();
+      window.app.restart();
+      window.app.queueNextBlock();
+      $(this).parents('div.page').fadeOut();
+      e.preventDefault();
     });
   });
 

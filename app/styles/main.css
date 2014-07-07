@@ -136,6 +136,10 @@ form {
     padding: 1% 4% 6% 4%;
 }
 
+input[type=submit] {
+
+}
+
 label {
     display:block;
     clear:both;
