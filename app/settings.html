@@ -1,0 +1,29 @@
+<div class="page page-settings">
+    <div class="page-container">
+        <div class="exit-page">
+            <a href="#"><span class="fa fa-times"></span></a>
+        </div>
+        <div class="settings-content">
+            <h2>Settings</h2>
+            <form>
+              <div>
+                <label for="work-time">How long would you like your <strong>work blocks</strong> to be?</label>
+                10 min <input type="range" name="work-time-range" min="10" max="60" step="1"> 60 min
+                <input type="text" name="work-time"/>
+              </div>
+              <div>
+                <label for="short-break">How long would you like your <strong>short breaks</strong> to be?</label>
+                1 min <input type="range" name="short-break-range" min="1" max="15" step="1"> 15 min
+                <input type="text" name="short-break"/>
+              </div>
+              <div>
+                <label for="long-break">How long would you like your <strong>long breaks</strong> to be?</label>
+                1 min <input type="range" name="long-break-range" min="1" max="30" step="1"> 30 min
+                <input type="text" name="long-break"/>
+              </div>
+              <input type="submit" value="Save Settings" />
+              <p><a href="#" class="default-settings">Restore default settings</a></p>
+            </form>
+        </div>
+    </div>
+</div>
