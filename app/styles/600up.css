@@ -1,0 +1,16 @@
+.page {
+    width: 400px;
+    min-height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+    left:auto;
+}
+
+.tracking-notes {
+    width: 400px;
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+}
