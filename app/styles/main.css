@@ -64,10 +64,10 @@ em {
 .navigation ul li {
     display:inline-block;
     background: rgba(0,0,0,0.1);
-    padding:1% 0;
-    margin:0.3%;
+    padding:2% 0;
+    margin:1%;
     font-weight: 700;
-    width:10%;
+    width:15%;
     border-radius: 3px;
     border-radius: 3px 3px 3px 3px;
     cursor: pointer;
@@ -194,6 +194,7 @@ input[type=submit] {
     -webkit-transition-delay: 0s;
     -webkit-transition-duration: 0.5s;
     -webkit-transition-timing-function: ease;
+    -webkit-appearance: none;
 }
 
 input[type=submit]:hover {
@@ -211,6 +212,7 @@ input[type=submit]:hover {
     -webkit-transition-duration: 0.5s;
     -webkit-transition-timing-function: ease;
     cursor: pointer;
+    -webkit-appearance: none;
 }
 
 label {
@@ -377,8 +379,6 @@ span.fa-pencil:hover {
 }
 
 .timer-inner{
-    background-size: auto;
-    -webkit-background-size: auto;
     -webkit-font-smoothing: antialiased;
     border: 2px solid #fff;
     border-radius: 3px;
@@ -388,8 +388,8 @@ span.fa-pencil:hover {
     font-family: 'Open Sans', Helvetica, Arial, Lucida, sans-serif;
     font-size: 1.5em;
     letter-spacing:-0.02em;
-    padding: 1.5%;
-    width:50%;
+    padding: 3%;
+    width:70%;
     text-align: center;
     text-decoration: none;
     transition-delay: 0s;
@@ -432,14 +432,11 @@ span.fa-pencil:hover {
 }
 
 .timer-inner:hover{
-    -webkit-background-size: auto;
     -webkit-font-smoothing: antialiased;
     background-color: rgba(255, 255, 255, 0.15);
-    background-image: none;
-    background-size: auto;
     border-color: rgba(255, 255, 255, 0);
-    padding: 1.5%;
-    width:50%;
+    padding: 3%;
+    width:70%;
     text-align: center;
     text-decoration: none;
     transition-delay: 0s;
